@@ -66,7 +66,7 @@ public class TaskContrller : ControllerBase
             newTask.Name = randomName;  
             newTask.Description = "This is a random task";   
             newTask.DueDate = new DateTime();
-            newTask.AssignedUser = new User("alkihuri");
+            newTask.AssignedUser = new User {Name = "string", Email = "string@mail.com", Password = "string", ID = 1};
             _taskManager.AddTask(newTask); 
          }
     }

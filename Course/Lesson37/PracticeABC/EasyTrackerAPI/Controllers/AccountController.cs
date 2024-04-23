@@ -1,50 +1,61 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+
 
 [Controller]
 [Route("/api/account/")]
 public class AccountController : ControllerBase
 {
-    private readonly IAccountManager _accountManager;
+    private readonly UserManager<IdentityUser> _userManager;
+    private readonly SignInManager<IdentityUser> _signInManager;
 
-    public AccountController(IAccountManager accountManager)
+    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
     {
-        _accountManager = accountManager;
+        _userManager = userManager;
+        _signInManager = signInManager;
     }
 
-    [HttpPost("verify")]
-    public IActionResult VerifyAccount([FromBody] User account)
-    {
-        bool isVerified = _accountManager.VerifyAccount(account);
-        var response = new
-        {
-            User = account,
-            IsVerified = isVerified
-        };
-        return Ok(response);
-    }
 
     [HttpPost("register")]
-    public IActionResult RegisterAccount([FromBody] User account)
+    public IActionResult Create([FromBody] User account)
     {
-        _accountManager.RegisterAccount(account);
-        bool isVerified = _accountManager.VerifyAccount(account);
-        var response = new
+        var user = new IdentityUser { UserName = account.Name, Email = account.Email};
+        var result = _userManager.CreateAsync(user, account.Password).Result;
+        if (result.Succeeded)
         {
-            User = account,
-            IsVerified = isVerified
-        };
-        return Ok(response);
+            _signInManager.SignInAsync(user, false).Wait();
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
+    }
+    
+    [HttpPost("login")]
+    public IActionResult Login([FromBody] User account)
+    {
+        var result = _signInManager.PasswordSignInAsync(account.Name, account.Password,false, false).Result;
+        if (result.Succeeded)
+        {
+            return Ok();
+        }
+        else
+        {
+            return BadRequest();
+        }
     }
 
-    [HttpGet("get/{name}")]
-    public IActionResult GetAccount(string name)
+    [HttpGet("logout")]
+    public IActionResult Logout()
     {
-        return Ok(_accountManager.GetAccount(name));
+        _signInManager.SignOutAsync().Wait();
+        return Ok();
     }
 
-    [HttpGet("getall")]
-    public IActionResult GetAccounts()
+    [HttpGet("account")]
+    public List<User> GetAccounts()
     {
-        return Ok(_accountManager.GetAccounts());
+        return _userManager.Users.Select(u => new User { Name = u.UserName, Email = u.Email }).ToList();
     }
 }
