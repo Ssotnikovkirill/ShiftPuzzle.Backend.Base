@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 public interface IAccountManager
 {
-    void RegisterAccount(IdentityUser account); 
-    IdentityUser GetAccount(string accountName);
-    List<IdentityUser> GetAccounts(); 
-    bool VerifyAccount(IdentityUser account);
+    void RegisterAccount(User account); 
+    User GetAccount(string accountName);
+    List<User> GetAccounts(); 
+    bool VerifyAccount(User account);
 }

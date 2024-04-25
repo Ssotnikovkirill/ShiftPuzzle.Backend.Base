@@ -5,56 +5,36 @@ using System.Collections.Generic;
 
 public class AccountController : ControllerBase
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
+    //private readonly UserManager<IdentityUser> _userManager;
+    //private readonly SignInManager<IdentityUser> _signInManager;
 
-    public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+    private readonly IAccountManager _accountManager;
+    public AccountController(IAccountManager accountManager)
     {
-        _userManager = userManager;
-        _signInManager = signInManager;
+        _accountManager = accountManager;
     }
 
-    [HttpPost("/api/account/register")]
-    public IActionResult Create([FromBody] User account)
+    [HttpPost("api/account/verify")]
+    public bool Verify([FromBody] User account)
     {
-        var user = new IdentityUser { UserName = account.Name, Email = account.Email };
-        var result = _userManager.CreateAsync(user, account.Password).Result;
-
-        if (result.Succeeded)
-        {
-            _signInManager.SignInAsync(user, isPersistent: false).Wait();
-            return Ok();
-        }
-        else
-        {
-            return BadRequest();
-        }
+        return _accountManager.VerifyAccount(account);
     }
 
-    [HttpPost("/api/account/login")]
-    public IActionResult Login([FromBody] User account)
+    [HttpPost("/api/account/register")]  
+    public void Register([FromBody] User account)
     {
-        var result = _signInManager.PasswordSignInAsync(account.Name, account.Password, false, false).Result;
-        if (result.Succeeded)
-        {
-            return Ok();
-        }
-        else
-        {
-            return BadRequest();
-        }
+        _accountManager.RegisterAccount(account);
     }
 
-    [HttpGet("/api/account/logout")]
-    public IActionResult Logout()
+    [HttpGet("/api/account/get/{name}")] 
+    public User GetUser(string name)
     {
-        _signInManager.SignOutAsync().Wait();
-        return Ok();
+        return _accountManager.GetAccount(name);
     }
 
-    [HttpGet("/api/account")]
-    public List<User> GetAccounts()
+    [HttpGet("/api/account/getall")]
+    public List<User> GetAll()
     {
-        return _userManager.Users.Select(x => new User {Name = x.UserName, Email = x.Email}).ToList();
+        return _accountManager.GetAccounts();
     }
 }

@@ -114,6 +114,9 @@
         button[type="submit"]:hover {
             background-color: #45a049;
         }
+        select {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -128,6 +131,12 @@
         <input type="text" id="regUsername" name="regUsername" required>
         <label for="regPassword">Пароль:</label>
         <input type="password" id="regPassword" name="regPassword" required>
+        <label for="regRole">Роль:</label>
+        <select id="regRole" name="regRole">
+            <option value="manager">Менеджер</option>
+            <option value="programmer">Програмист</option>
+            <option value="designer">Дизайнер</option>
+        </select>
         <div>
             <button type="submit">Зарегистрироваться</button>
         </div>
@@ -142,9 +151,7 @@
     </form>
     </divd>
     <div id="registrationMessage">
-
         <label for="currentMessage"> </label>
-
     </div>
     
     <form id="createTaskForm">
@@ -184,7 +191,8 @@
                 const formData = new FormData(registrationForm);
                 const userData = {
                     name: formData.get('regUsername'), // Имя пользователя используется в качестве логина
-                    password: formData.get('regPassword')
+                    password: formData.get('regPassword'),
+                    role: formData.get('regRole')
                 };
 
                 fetch('/api/account/register', {

@@ -7,7 +7,7 @@ public class User
 
     public User(string name)
     {
-        Name = name; 
+        UserName = name; 
     }
 
     public User()
@@ -15,9 +15,10 @@ public class User
         
     }
 
-    public long ID { get; set; }
+    public string ID { get; set; }
     //public bool IsVerified = false;
-    public string? Name { get; set; }
+    public string? UserName { get; set; }
     public string? Email { get; set; }
-    public string? Password { get; set; }  
+    public string? PasswordHash { get; set; }  
+    public string? Role { get; set; }
 }

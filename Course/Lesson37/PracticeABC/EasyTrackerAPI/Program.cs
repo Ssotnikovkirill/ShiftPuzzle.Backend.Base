@@ -44,11 +44,11 @@ builder.Services.AddSwaggerGen(c =>
 
 //builder.Services.AddDbContext<AccountContext>();
 
-builder.Services.AddIdentityCore<IdentityUser>()
-    .AddEntityFrameworkStores<AccountContext>();
-
-builder.Services.AddScoped<UserManager<IdentityUser>>();
-builder.Services.AddScoped<SignInManager<IdentityUser>>();
+//builder.Services.AddIdentityCore<IdentityUser>()
+//    .AddEntityFrameworkStores<AccountContext>();
+//
+//builder.Services.AddScoped<UserManager<IdentityUser>>();
+//builder.Services.AddScoped<SignInManager<IdentityUser>>();
 
 var app = builder.Build();
 
