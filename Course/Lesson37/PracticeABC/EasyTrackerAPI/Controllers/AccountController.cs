@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;   
+using System.Collections.Generic;
 
 
 public class AccountController : ControllerBase
@@ -9,7 +9,7 @@ public class AccountController : ControllerBase
     public AccountController(IAccountManager accountManager)
     {
         _accountManager = accountManager;
-    }   
+    }
 
     [HttpGet("/api/account/getall")]
     public IActionResult GetAll()
@@ -26,15 +26,25 @@ public class AccountController : ControllerBase
     [HttpPost("/api/account/register")]
     public IActionResult Create([FromBody] User account)
     {
-        Console.WriteLine("Registering account: " + account.Name); 
-        _accountManager.RegisterAccount(account); 
-        return Ok(account); 
-    }   
+        Console.WriteLine("Registering account: " + account.Name);
+        _accountManager.RegisterAccount(account);
 
-    [HttpPost("api/account/verify")]    
+        bool isVerified = _accountManager.VerifyAccount(account);
+
+        // Создаем объект для ответа, который содержит информацию о пользователе и его статусе верификации
+        var response = new
+        {
+            User = account,
+            IsVerified = isVerified
+        };
+
+        return Ok(response);
+    }
+
+    [HttpPost("api/account/verify")]
     public IActionResult Verify([FromBody] User account)
     {
         return Ok(_accountManager.VerifyAccount(account));
-    }   
+    }
 
-} 
+}

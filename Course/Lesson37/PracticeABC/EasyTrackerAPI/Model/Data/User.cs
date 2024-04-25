@@ -15,6 +15,13 @@ public class User
         
     }
 
+    public User(long id, string name, string password)
+    {
+        this.ID = id;
+        this.Name = name;
+        this.Password = password;
+    }
+
     public long ID { get; set; }
     public string? Name { get; set; }
     public string? Email { get; set; }

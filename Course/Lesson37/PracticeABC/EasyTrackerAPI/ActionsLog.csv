@@ -1,0 +1,40 @@
+xxx,123,23.04.2024 13:35:56,account created
+xxx,123,23.04.2024 13:35:56,account verified
+xxx,123,23.04.2024 13:36:18,task added
+xxx,123,23.04.2024 13:36:18,tasks shown
+xxx,123,23.04.2024 13:36:25,tasks shown
+xxx,123,23.04.2024 13:36:32,account created
+xxx,123,23.04.2024 13:36:32,account verified
+xxx,123,23.04.2024 13:36:35,tasks shown
+xxx,1234,23.04.2024 13:36:57,account created
+xxx,1234,23.04.2024 13:36:57,account verified
+xxx,1234,23.04.2024 13:37:06,tasks shown
+xxx,1234,23.04.2024 13:50:18,tasks shown
+xxx,1234,23.04.2024 18:12:07,tasks shown
+empty,empty,23.04.2024 18:27:21,tasks shown
+xxx,12345,23.04.2024 18:27:26,account created
+xxx,12345,23.04.2024 18:27:26,account verified
+empty,empty,23.04.2024 18:32:09,tasks shown
+xxx,12345678,23.04.2024 18:32:14,account created
+xxx,12345678,23.04.2024 18:32:14,account verified
+empty,empty,23.04.2024 18:34:43,tasks shown
+empty,empty,23.04.2024 18:34:45,user tried to enter into account
+empty,empty,23.04.2024 18:34:46,account not verified
+empty,empty,23.04.2024 18:34:51,user tried to enter into account
+empty,empty,23.04.2024 18:34:51,account not verified
+empty,empty,23.04.2024 18:34:52,user tried to enter into account
+empty,empty,23.04.2024 18:34:52,account not verified
+empty,empty,23.04.2024 18:34:52,user tried to enter into account
+empty,empty,23.04.2024 18:34:52,account not verified
+empty,empty,23.04.2024 18:34:53,user tried to enter into account
+empty,empty,23.04.2024 18:34:53,account not verified
+empty,empty,23.04.2024 18:34:56,user tried to enter into account
+xxx,123,23.04.2024 18:34:56,account verified
+xxx,123,23.04.2024 18:34:58,tasks shown
+xxx,123,23.04.2024 18:35:01,user tried to enter into account
+xxx,123,23.04.2024 18:35:01,account not verified
+xxx,123,23.04.2024 18:35:04,user tried to enter into account
+xxx,12345,23.04.2024 18:35:04,account verified
+xxx,12345,23.04.2024 18:59:24,tasks shown
+xxx,12345,23.04.2024 18:59:28,user tried to enter into account
+xxx,123,23.04.2024 18:59:28,account verified
